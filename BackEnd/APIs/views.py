@@ -1,3 +1,5 @@
+from datetime import datetime,timedelta
+from django.utils import timezone
 from .models import Users
 from .serializers import UsersSerializer
 from rest_framework.views import APIView
@@ -5,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.core.exceptions import ObjectDoesNotExist
 from hashlib import md5
+import jwt 
 
 class createUserAPIView(APIView):
     def get(self,request):
@@ -65,6 +68,14 @@ class AuthenticateUserAPIView(APIView):
                 try:
                     user = Users.objects.get(username = username, password = password)
                     if user:
+                        userDetails = {
+                            "username":user.username,
+                            "name":user.name,
+                            "email":user.email,
+                            "exp":datetime.now(tz=timezone.utc)+timedelta(days=2)
+                        }
+                        encoded_jwt = jwt.encode(userDetails, "secret", algorithm="HS256")           
+                        print("access token",encoded_jwt)        
                         response_data = {
                             "message": "User logged In",
                             "results": {
