@@ -79,6 +79,7 @@ class AuthenticateUserAPIView(APIView):
                         response_data = {
                             "message": "User logged In",
                             "results": {
+                                "access token":encoded_jwt
                             },
                             "success": True
                         }
