@@ -16,16 +16,12 @@ export class LoginComponent {
 
   loginForm  = new FormGroup({
   username : new FormControl('',[Validators.required]),
-  password : new FormControl('',[Validators.required,Validators.minLength(6)])
+  password : new FormControl('',[Validators.required, Validators.minLength(6), Validators.maxLength(15)])
   });
 
   get isLoginBtnEnabled(){
     return this.loginForm.valid;
   }
-
-  // get passwordValid(){
-  //   return (this.loginForm.controls.password.value?.length! < 6 || this.loginForm.controls.password.value?.length! > 15) && this.loginForm.controls.password.touched;
-  // }
 
   constructor(private http:HttpService, private ss:SingletonService){}
 
@@ -47,9 +43,8 @@ export class LoginComponent {
     console.log(this.loginForm.value);
     this.http.httpRequest("POST","login",this.loginForm.value).subscribe((res:any)=>{
       if(res.status === 200){
+        localStorage.setItem("token",res.body.results?.access_token);
         this.ss.statusMessage.showStatusMessage('SUCCESS',res.body.message,5000);
-        // console.log(res.body.message);
-        
       }
     },(error:any)=>{
       console.log(error.error.message);

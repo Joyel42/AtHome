@@ -60,7 +60,7 @@ class AuthenticateUserAPIView(APIView):
                         response_data = {
                             "message": "User logged In Successfully",
                             "results": {
-                                "access token":encoded_jwt
+                                "access_token":encoded_jwt
                             },
                             "success": True
                         }
@@ -82,12 +82,11 @@ class AuthenticateUserAPIView(APIView):
                             "email":user.email,
                             "exp":datetime.now(tz=timezone.utc)+timedelta(days=2)
                         }
-                        encoded_jwt = jwt.encode(userDetails, "secret", algorithm="HS256")           
-                        print("access token",encoded_jwt)        
+                        encoded_jwt = jwt.encode(userDetails, "secret", algorithm="HS256")                
                         response_data = {
                             "message": "User logged In Successfully",
                             "results": {
-                                "access token":encoded_jwt
+                                "access_token":encoded_jwt
                             },
                             "success": True
                         }
