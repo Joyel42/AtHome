@@ -1,0 +1,59 @@
+<div class="login-container flex aln-ctr jstfy-ctr">
+    <div class="login-box flex-col aln-ctr jstfy-ctr">
+        <div class="mb-30 fs-50 fw-600 crsr-deflt">
+            <p>Register Now!</p>
+        </div>
+        <div class="login-form flex-col" [formGroup]="registrationForm">
+            <div class="mb-15">
+                <mat-form-field class="material-form-field">
+                    <mat-label>Username</mat-label>
+                    <input type="text" matInput placeholder="Username" formControlName="username" >
+                    <mat-error class="mt-5 mb-5" *ngIf="registrationForm.controls.username.value?.length != 0  && !registrationForm.controls.username.valid && registrationForm.controls.username.touched">Enter between 3-10 charchters</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="mb-15">
+                <mat-form-field class="material-form-field">
+                    <mat-label>Name</mat-label>
+                    <input type="text" matInput placeholder="Name" formControlName="name" class="fs-17">
+                    <mat-error class="mt-5 mb-5" *ngIf="!registrationForm.controls.name.valid && registrationForm.controls.name.touched && !isNameValid">Enter a minimum of 3 charchters</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="mb-15">
+                <mat-form-field class="material-form-field">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput placeholder="Email" formControlName="email" class="fs-17">
+                    <mat-error class="mt-5 mb-5" *ngIf="!isEmailValid">Enter a valid Email</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="mb-15 pos-rel">
+                <mat-form-field class="material-form-field">
+                    <mat-label>Password</mat-label>
+                    <input [type]="inputFieldType" matInput placeholder="Password" formControlName="password" class="fs-17" (input)="showError()">
+                    <span #passwordIcon class="material-symbols-outlined pos-abs rt-0 tp-15 crsr-ptr" (click)="showOrHidePassword($event)">
+                        visibility_off
+                    </span>
+                    <mat-error class="mt-5 mb-5" *ngIf="!registrationForm.controls.password.valid && registrationForm.controls.password?.value?.length != 0">Enter between 6-15 charchters</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="mb-20 pos-rel">
+                <mat-form-field class="material-form-field">
+                    <mat-label>Confirm Password</mat-label>
+                    <input [type]="inputFieldType1" matInput placeholder="Confirm Password" [formControl]="confirmPassword" class="fs-17" (input)="showError()">
+                    <span #passwordIcon1 class="material-symbols-outlined pos-abs rt-0 tp-15 crsr-ptr" (click)="showOrHidePassword1($event)">
+                        visibility_off
+                    </span>
+                    <mat-error class="mt-5 mb-5" *ngIf="(confirmPassword.hasError('maxlength') || confirmPassword.hasError('minlength')) && isPasswordsMatching">Password must be between 6-15 charchters</mat-error>
+                    <mat-error class="mt-5 mb-5" *ngIf="!isPasswordsMatching">Password Mismatching</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="mb-20">
+                <button type="submit" class="fs-18" (click)="onRegisterClick()" [disabled]="!isRegisterFormValid">
+                    Register
+                </button>
+            </div>
+            <div class="txt-ctr">
+                Already a User? <span class="underline crsr-ptr" routerLink="/login">Login</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+//mixin for padding generation
+@mixin padding($attr,$prefix,$step,$range,$unit){
+    @for $i from $step through $range {
+        .#{$prefix}#{$i}{
+            #{$attr}:#{$i}#{$unit};
+        }
+    }
+}
+
+// mixin for font-weight generation
+@mixin fontweight($attr,$prefix,$step,$range){
+    @for $i from 1 through $range {
+        .#{$prefix}#{$i*100}{
+            #{$attr}:#{$i*100};
+        }
+    }
+  }
+  
