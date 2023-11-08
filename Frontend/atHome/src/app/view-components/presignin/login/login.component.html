@@ -1,0 +1,36 @@
+<div class="login-container flex aln-ctr jstfy-ctr">
+    <div class="login-box flex-col aln-ctr jstfy-ctr">
+        <div class="mb-30 fs-50 fw-600 crsr-deflt">
+            <p>Login Now!</p>
+        </div>
+        <div class="login-form flex-col" [formGroup]="loginForm">
+            <div class="mb-15">
+                <mat-form-field class="material-form-field">
+                    <mat-label>Username or Email</mat-label>
+                    <input type="text" placeholder="Username or Email" matInput class="fs-17" formControlName="username">
+                </mat-form-field>
+            </div>
+            <div class="mb-10 pos-rel flex-col">
+                <mat-form-field class="material-form-field">
+                    <mat-label>Password</mat-label>
+                    <input matInput [type]="inputFieldType" placeholder="Password" class="fs-17" formControlName="password" >
+                    <span #passwordIcon class="material-symbols-outlined pos-abs rt-0 tp-15 crsr-ptr" (click)="showOrHidePassword($event)">
+                        visibility_off
+                    </span>
+                    <mat-error *ngIf="loginForm.controls.password.dirty">Password must be between 6-15 charchters</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="mb-30 crsr-ptr underline">
+                Forgot Password?
+            </div>
+            <div class="mb-20">
+                <button type="submit" class="fs-18" (click)="loginBtnClick()"  [disabled]="!isLoginBtnEnabled">
+                    Login
+                </button>
+            </div>
+            <div class="txt-ctr">
+                Not a User? <span class="underline crsr-ptr" routerLink="/register">Register Now</span>
+            </div>
+        </div>
+    </div>
+</div>

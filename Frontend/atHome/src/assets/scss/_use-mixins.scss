@@ -1,0 +1,23 @@
+@import "mixins";
+
+@include padding('padding','p-',0,300,'px');
+@include padding('padding-left','pl-',0,300,'px');
+@include padding('padding-right','pr-',0,300,'px');
+@include padding('padding-top','pt-',0,300,'px');
+@include padding('padding-bottom','pb-',0,300,'px');
+
+@include padding('margin','m-',0,300,'px');
+@include padding('margin-left','ml-',0,300,'px');
+@include padding('margin-right','mr-',0,300,'px');
+@include padding('margin-top','mt-',0,300,'px');
+@include padding('margin-bottom','mb-',0,300,'px');
+
+@include padding('width','w-', 0, 300 ,'px');
+
+@include padding('right','rt-', 0 , 300 ,'px');
+@include padding('left','lt-', 0 , 300 ,'px');
+@include padding('top','tp-', 0, 300 ,'px');
+@include padding('bottom','bt-', 0 , 300 ,'px');
+
+@include padding('font-size','fs-',1,150,'px');
+@include fontweight('font-weight','fw-',1,10);

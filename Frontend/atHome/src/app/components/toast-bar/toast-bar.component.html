@@ -1,0 +1,5 @@
+<ng-container *ngFor="let item of meassageQueue;let i = index;">
+    <div class="toast-bar-container mb-20" [class.success]="item.type === 'SUCCESS'" [class.warn]="item.type === 'WARN'" [class.error]="item.type === 'ERROR'" (click)="removeToastMessage(i)">
+        {{item.status}}
+    </div>
+</ng-container>
