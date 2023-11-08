@@ -24,7 +24,7 @@ class createUserAPIView(APIView):
             serialized.validated_data['password'] = hashpass
             serialized.save()
             response_data = {
-                "message": "User Created. Please Log in",
+                "message": "User Created. Please Log in!",
                 "results": {
                 },
                 "success": True
@@ -50,9 +50,17 @@ class AuthenticateUserAPIView(APIView):
                 try:
                     user = Users.objects.get(email = username, password = password)
                     if user:
+                        userDetails = {
+                            "username":user.username,
+                            "name":user.name,
+                            "email":user.email,
+                            "exp":datetime.now(tz=timezone.utc)+timedelta(days=2)
+                        }
+                        encoded_jwt = jwt.encode(userDetails, "secret", algorithm="HS256")      
                         response_data = {
-                            "message": "User logged In",
+                            "message": "User logged In Successfully",
                             "results": {
+                                "access token":encoded_jwt
                             },
                             "success": True
                         }
@@ -77,7 +85,7 @@ class AuthenticateUserAPIView(APIView):
                         encoded_jwt = jwt.encode(userDetails, "secret", algorithm="HS256")           
                         print("access token",encoded_jwt)        
                         response_data = {
-                            "message": "User logged In",
+                            "message": "User logged In Successfully",
                             "results": {
                                 "access token":encoded_jwt
                             },
