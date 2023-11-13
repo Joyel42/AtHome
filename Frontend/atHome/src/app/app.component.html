@@ -1,4 +1,9 @@
 <app-toast-bar class="pos-abs rt-0 tp-25 fs-17"></app-toast-bar>
-<main>
-    <router-outlet></router-outlet>
-</main>
+<div class="main-container flex jstfy-ctr aln-ctr" [class.flex]="!isUserLogined" >
+    <app-header *ngIf="isUserLogined"></app-header>
+    <app-sidebar *ngIf="isUserLogined"></app-sidebar>
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+    <app-footer *ngIf="isUserLogined"></app-footer>
+</div>

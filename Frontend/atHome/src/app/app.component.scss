@@ -1,4 +1,16 @@
-main{
+.main-container{
     width: 100%;
     height: 100%;
+}
+
+app-header{
+    display: block;
+    height: var(--headerHeight);
+    background-color: red;
+}
+
+app-footer{
+    display: block;
+    height: var(--headerHeight);
+    background-color: red;
 }

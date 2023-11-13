@@ -10,8 +10,12 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 })
 export class AppComponent implements AfterViewInit{
   title = 'atHome';
-
+  
   @ViewChild(ToastBarComponent,{static:false}) statusMessage!:ToastBarComponent;
+  
+  get isUserLogined(){
+    return this.userService.authenticateUser();
+  }
   
   constructor(private userService:UserService, private ss:SingletonService){
     console.log(this.userService.authenticateUser());

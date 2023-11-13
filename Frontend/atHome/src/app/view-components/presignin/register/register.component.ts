@@ -1,3 +1,4 @@
+import { UserService } from './../../../services/user.service';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -62,7 +63,11 @@ export class RegisterComponent {
     return this.registrationForm.valid && this.confirmPassword.valid && this.isPasswordsMatching;
   }
   
-  constructor(private http:HttpService, private ss:SingletonService, private route:Router){ }
+  constructor(private http:HttpService, private ss:SingletonService, private route:Router, private user:UserService){ 
+    if( this.user.authenticateUser()){
+      this.route.navigateByUrl('home');
+    }
+   }
   
   showOrHidePassword(event:Event){
     this.isPasswordVisible = !this.isPasswordVisible;

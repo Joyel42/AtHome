@@ -1,8 +1,10 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { HttpService } from 'src/app/services/http.service';
 import { SingletonService } from 'src/app/services/singleton.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +25,11 @@ export class LoginComponent {
     return this.loginForm.valid;
   }
 
-  constructor(private http:HttpService, private ss:SingletonService){}
+  constructor(private http:HttpService, private ss:SingletonService, private router:Router, private user:UserService){
+    if(this.user.authenticateUser()){
+      this.router.navigateByUrl('home');
+    }
+  }
 
   showOrHidePassword(event:Event){
     this.isPasswordVisible = !this.isPasswordVisible;
@@ -45,6 +51,7 @@ export class LoginComponent {
       if(res.status === 200){
         localStorage.setItem("token",res.body.results?.access_token);
         this.ss.statusMessage.showStatusMessage('SUCCESS',res.body.message,5000);
+        this.router.navigateByUrl('home')
       }
     },(error:any)=>{
       console.log(error.error.message);
